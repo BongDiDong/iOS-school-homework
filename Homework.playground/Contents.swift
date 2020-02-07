@@ -1,20 +1,18 @@
-import Cocoa
+import Foundation
 
-var str = "Hello, playground"
-
-func mean(arr: [Int]) -> Float {
-    guard !arr.isEmpty else {
-        return 0
+func mean(array: [Int]) -> Double? {
+    guard !array.isEmpty else {
+        return nil
     }
-    let sum = arr.reduce(0, +)
-    return Float(sum) / Float(arr.count)
+    let sum = array.reduce(0, +)
+    return Double(sum) / Double(array.count)
 }
 
-func median(arr: [Int]) -> Int {
-    guard !arr.isEmpty else {
-        return 0
+func median(array: [Int]) -> Int? {
+    guard !array.isEmpty else {
+        return nil
     }
-    let sortedArray = quickSort(arr: arr)
+    let sortedArray = quickSort(array: array)
     let count = sortedArray.count
     if count.isMultiple(of: 2) {
         let rightNum = sortedArray[count/2]
@@ -26,31 +24,31 @@ func median(arr: [Int]) -> Int {
     
 }
 
-func mode(arr: [Int]) -> [Int] {
-    var dictOfModeNumbers = [Int: Int]() // [number : mode of this number], example [1, 1 ,4] -> [1: 2, 4: 1]
+func mode(array: [Int]) -> [Int] {
+    var dictNumberToMode = [Int: Int]() // [number : mode of this number], example [1, 1 ,4] -> [1: 2, 4: 1]
     var modeNumbers = [Int]()
     var counterForModeNumbers = 1
-    for el in arr {
-        let mode = dictOfModeNumbers[el]
+    for element in array {
+        let mode = dictNumberToMode[element]
         switch mode {
         case nil:
             if counterForModeNumbers > 1 {
-                dictOfModeNumbers[el] = 1
+                dictNumberToMode[element] = 1
             } else {
-                dictOfModeNumbers[el] = 1
-                modeNumbers.append(el)
+                dictNumberToMode[element] = 1
+                modeNumbers.append(element)
             }
         case let mode? where (mode + 1) > counterForModeNumbers:
-            dictOfModeNumbers[el]! += 1
+            dictNumberToMode[element]! += 1
             counterForModeNumbers += 1
-            modeNumbers = [el]
+            modeNumbers = [element]
             
         case let mode? where (mode + 1) < counterForModeNumbers:
-            dictOfModeNumbers[el]! += 1
+            dictNumberToMode[element]! += 1
             
         case let mode? where (mode + 1) == counterForModeNumbers:
-            dictOfModeNumbers[el]! += 1
-            modeNumbers.append(el)
+            dictNumberToMode[element]! += 1
+            modeNumbers.append(element)
 
         default:
             return []
@@ -60,15 +58,14 @@ func mode(arr: [Int]) -> [Int] {
     return modeNumbers
 }
 
-func quickSort(arr: [Int]) -> [Int] {
-    guard !arr.isEmpty else { return arr}
+func quickSort(array: [Int]) -> [Int] {
+    guard array.count > 1 else { return array }
     
     var less = [Int]()
     var greater = [Int]()
     var equal = [Int]()
-    let pivot = arr[arr.count/2]
-    for elem in arr {
-        
+    let pivot = array[array.count/2]
+    for elem in array {
         switch elem {
         case (pivot+1)...:
             greater.append(elem)
@@ -81,12 +78,11 @@ func quickSort(arr: [Int]) -> [Int] {
         }
     }
     
-    return quickSort(arr: less) + equal + quickSort(arr: greater)
-    
+    return quickSort(array: less) + equal + quickSort(array: greater)
 }
 
-let seq: [Int] = [1, 1, 2, 3, 3, 2, 3, 2]
+let seq: [Int] = [1, 1, 2, 2, 3, 3, 3, 2, 4]
 
-mean(arr: seq)
-median(arr: seq)
-mode(arr: seq)
+mean(array: seq)
+median(array: seq)
+mode(array: seq)
