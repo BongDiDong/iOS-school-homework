@@ -1,5 +1,3 @@
-import Foundation
-
 func mean(array: [Int]) -> Double? {
     guard !array.isEmpty else {
         return nil
@@ -13,18 +11,17 @@ func median(array: [Int]) -> Int? {
         return nil
     }
     let sortedArray = quickSort(array: array)
-    let count = sortedArray.count
-    if count.isMultiple(of: 2) {
-        let rightNum = sortedArray[count/2]
-        let leftNum = sortedArray[count/2 - 1]
+    let arrayLength = sortedArray.count
+    if arrayLength.isMultiple(of: 2) {
+        let rightNum = sortedArray[arrayLength/2]
+        let leftNum = sortedArray[arrayLength/2 - 1]
         return (leftNum + rightNum)/2
     } else {
-        return sortedArray[count/2]
+        return sortedArray[arrayLength/2]
     }
-    
 }
 
-func mode(array: [Int]) -> [Int] {
+func mode(array: [Int]) -> [Int]? {
     var dictNumberToMode = [Int: Int]() // [number : mode of this number], example [1, 1 ,4] -> [1: 2, 4: 1]
     var modeNumbers = [Int]()
     var counterForModeNumbers = 1
@@ -55,7 +52,11 @@ func mode(array: [Int]) -> [Int] {
         }
     }
     
-    return modeNumbers
+    if array.count == modeNumbers.count {
+        return nil
+    } else {
+        return modeNumbers
+    }
 }
 
 func quickSort(array: [Int]) -> [Int] {
