@@ -15,7 +15,7 @@ func median(array: [Int]) -> Int? {
     if arrayLength.isMultiple(of: 2) {
         let rightNum = sortedArray[arrayLength/2]
         let leftNum = sortedArray[arrayLength/2 - 1]
-        return (leftNum + rightNum)/2
+        return (leftNum + rightNum) / 2
     } else {
         return sortedArray[arrayLength/2]
     }
