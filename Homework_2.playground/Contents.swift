@@ -1,24 +1,19 @@
-
 class Stack {
-    private var head: Frame? = nil
+    private var head: Frame?
     
     func push(element: Int) {
-        if let notNilHead = head {
-            head = Frame(data: element, nextFrame: notNilHead)
-        } else {
-            head = Frame(data: element, nextFrame: nil)
-        }
+        head = Frame(data: element, nextFrame: head)
     }
     
     func pop() -> Int? {
-        guard let notNilHead = head else { return nil }
-        head = notNilHead.next
-        return notNilHead.data
+        guard let head = head else { return nil }
+        self.head = head.next
+        return head.data
     }
     
     func top() -> Int? {
-        guard let notNilHead = head else { return nil }
-        return notNilHead.data
+        guard let head = head else { return nil }
+        return head.data
     }
 }
 
@@ -46,24 +41,17 @@ stack.pop()
 stack.pop()
 stack.top()
 
-//________________________________________________________________________
-
 class StackStatistics: Stack {
     private let stackOfMinElements = Stack()
     
     override func push(element: Int) {
         super.push(element: element)
         
-        guard let minElementInStack = stackOfMinElements.top() else {
+        guard let currentMinElement = stackOfMinElements.top(), currentMinElement < element else {
             stackOfMinElements.push(element: element)
             return
         }
-        
-        if minElementInStack < element {
-            stackOfMinElements.push(element: minElementInStack)
-        } else {
-            stackOfMinElements.push(element: element)
-        }
+        stackOfMinElements.push(element: currentMinElement)
     }
     
     override func pop() -> Int? {
