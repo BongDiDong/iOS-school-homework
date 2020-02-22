@@ -1,18 +1,32 @@
 class Stack {
-    private var head: Frame?
+    private let linkedList = LinkedList()
     
     func push(element: Int) {
-        head = Frame(data: element, nextFrame: head)
+        linkedList.append(element)
     }
     
     func pop() -> Int? {
-        guard let head = head else { return nil }
-        self.head = head.next
-        return head.data
+        return linkedList.removeLast()
     }
     
     func top() -> Int? {
+        return linkedList.last
+    }
+}
+
+class LinkedList {
+    private var head: Frame?
+    var last: Int? {
+        return head?.data
+    }
+    
+    func append(_ element: Int) {
+        head = Frame(data: element, nextFrame: head)
+    }
+    
+    func removeLast() -> Int? {
         guard let head = head else { return nil }
+        self.head = head.next
         return head.data
     }
 }
