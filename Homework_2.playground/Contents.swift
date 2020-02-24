@@ -6,25 +6,25 @@ class Stack {
     }
     
     func pop() -> Int? {
-        return linkedList.removeLast()
+        return linkedList.removeFirst()
     }
     
     func top() -> Int? {
-        return linkedList.last
+        return linkedList.first
     }
 }
 
 class LinkedList {
     private var head: Frame?
-    var last: Int? {
+    var first: Int? {
         return head?.data
     }
     
     func append(_ element: Int) {
-        head = Frame(data: element, nextFrame: head)
+        head = Frame(data: element, previousFrame: head)
     }
     
-    func removeLast() -> Int? {
+    func removeFirst() -> Int? {
         guard let head = head else { return nil }
         self.head = head.next
         return head.data
@@ -35,9 +35,9 @@ class Frame {
     let data: Int
     let next: Frame?
     
-    init(data: Int, nextFrame: Frame?) {
+    init(data: Int, previousFrame: Frame?) {
         self.data = data
-        self.next = nextFrame
+        self.next = previousFrame
     }
 }
 
@@ -69,9 +69,9 @@ class StackStatistics: Stack {
     }
     
     override func pop() -> Int? {
-        guard let number = super.pop() else { return nil }
+        guard let element = super.pop() else { return nil }
         stackOfMinElements.pop()
-        return number
+        return element
     }
     
     func minimumElement() -> Int? {
