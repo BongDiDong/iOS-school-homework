@@ -1,29 +1,4 @@
 /// Container for elements organized with LIFO principle.
-///
-/// First of all, for working with stack we need the instance of the particular type of Stack.
-///
-///     let stack = Stack<Int>()
-///
-/// Then we can provide operations for working with elements of the stack:
-///
-///     //add an element on top of the stack
-///     stack.push(element: 4)
-///
-///     //return an element on top of the stack
-///     print(stack.top())
-///     //prints "4"
-///
-///     //remove and return an element on top of the stack
-///     print(stack.pop())
-///     //prints "4"
-///
-///     //If Stack is empty pop() and top() return nil
-///     if let topElement = stack.pop() {
-///         prints(topElement)
-///     } else {
-///         print("Stack is empty")
-///     //prints "Stack is empty" because at the previous step
-///     //we pop the last element in the stack.
 class Stack<Element> {
     private let linkedList = LinkedList<Element>()
     
@@ -70,31 +45,6 @@ class Stack<Element> {
 }
 
 /// Linear collection of data elements, where each element points to the next element.
-///
-/// First of all, for working with LinkedList we need the instance of the particular type of LinkedList.
-///
-///     let linkedList = LinkedList<Int>()
-///
-/// Then we can provide operations for working with elements of the LinkedList:
-///
-///     //add a new element at the head of the list
-///     linkedList.append(4)
-///
-///     //return the first element in the list
-///     print(linkedList.first)
-///     //prints "4"
-///
-///     //remove and return the first element in the list
-///     print(linkedList.removeFirst())
-///     //prints "4"
-///
-///     //If list is empty, linkedList.first and linkedList.removeFirst() return nil
-///     if let firstElement = linkedList.removeFirst() {
-///         prints(firstElement)
-///     } else {
-///         print("List is empty")
-///     //prints "List is empty" because at the previous step
-///     //we remove the last element in the list.
 class LinkedList<Element> {
     private var head: Frame<Element>?
     
@@ -173,43 +123,6 @@ stack.top()
 
 /// Container for elements organized with LIFO principle. Stores the current minimum element of the Stack.
 /// Elements in StackStatistics must conform to Comparable protocol
-///
-/// First of all, for working with stackStatistics we need the instance of the particular type of Stack.
-///
-///     let stack = StackStatistics<Int>()
-///
-/// Then we can provide operations for working with elements of the stack:
-///
-///     //add an element on top of the stack
-///     stack.push(element: 4)
-///
-///     //return an element on top of the stack
-///     print(stack.top())
-///     //prints "4"
-///
-///     //return minimum element in the stack
-///     stack.push(element: 3)
-///     stack.push(element: 5)
-///     //head -> 5 -> 3 -> 4
-///     print(stack.minimumElement())
-///     //prints "3"
-///
-///     //remove and return an element on top of the stack
-///     stack.pop()
-///     stack.pop()
-///     print(stack.pop())
-///     //prints "4"
-///
-///     //If Stack is empty pop(), top() and minimumElement() return nil
-///     if let topElement = stack.pop() {
-///         prints(topElement)
-///     } else {
-///         print("Stack is empty")
-///     //prints "Stack is empty" because at the previous step
-///     //we pop the last element in the stack.
-///
-///
-///
 class StackStatistics<Element>: Stack<Element> where Element : Comparable {
     private let stackOfMinElements = Stack<Element>()
     
