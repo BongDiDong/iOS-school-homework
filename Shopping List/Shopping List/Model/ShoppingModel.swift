@@ -17,21 +17,21 @@ class ShoppingModel: ShoppingList {
     }
 
     func remove(_ item: String) -> Bool {
-        guard shoppingList.contains(item) else { return false }
+        guard let index = shoppingList.firstIndex(of: item) else { return false }
 
-        shoppingList.removeAll { $0 == item }
+        shoppingList.remove(at: index)
         return true
     }
 
     func remove(at index: Int) -> Bool {
-        guard index < shoppingList.count, index >= 0 else { return false }
+        guard (0..<shoppingList.count).contains(index) else { return false }
 
         shoppingList.remove(at: index)
         return true
     }
 
     func edit(at index: Int, with newValue: String) -> Bool {
-        guard index < shoppingList.count, index >= 0 else { return false }
+        guard (0..<shoppingList.count).contains(index) else { return false }
 
         shoppingList[index] = newValue
         return true

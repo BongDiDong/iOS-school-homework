@@ -21,45 +21,8 @@ class ItemsTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
     }
 
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingModel.shoppingList.count
-    }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cellIdentifier = "ItemTableViewCell"
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
-                                                       for: indexPath) as? ItemTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of ItemTableViewCell.")
-        }
-
-        let item = shoppingModel.shoppingList[indexPath.row]
-        cell.nameLabel.text = item
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView,
-                            commit editingStyle: UITableViewCell.EditingStyle,
-                            forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if shoppingModel.remove(at: indexPath.row) {
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                os_log("Item was successfully removed.", log: OSLog.default, type: .debug)
-            } else {
-                os_log("Something goes wrong while removing the item.", log: OSLog.default, type: .debug)
-            }
-        }
-    }
-
     // MARK: - Actions
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+    @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ItemViewController, let item = sourceViewController.item {
 
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
@@ -87,28 +50,43 @@ class ItemsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
 
+        let alert = UIAlertController(title: "Oops",
+                                      message: "Sorry, something goes wrong. Restart the app if it's possible",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
         switch segue.identifier ?? "" {
         case "AddItem":
             os_log("Adding a new item.", log: OSLog.default, type: .debug)
 
         case "ShowDetail":
             guard let itemDetailViewController = segue.destination as? ItemViewController else {
-                fatalError("Unexpected destination: \(segue.destination)")
+                os_log("Segue destination is not ItemViewController. Segue Identifier 'ShowDetail'.",
+                       log: OSLog.default, type: .error)
+                self.present(alert, animated: true, completion: nil)
+                return
             }
 
             guard let selectedItemCell = sender as? ItemTableViewCell else {
-                fatalError("Unexpected sender: \(String(describing: sender))")
+                os_log("Selected cell is not ItemTableViewCell. Segue Identifier 'ShowDetail'.",
+                       log: OSLog.default, type: .error)
+                self.present(alert, animated: true, completion: nil)
+                return
             }
 
             guard let indexPath = tableView.indexPath(for: selectedItemCell) else {
-                fatalError("The selected cell is not being displayed by the table")
+                os_log("Index path for cell is invalid. Segue Identifier 'ShowDetail'.",
+                       log: OSLog.default, type: .error)
+                self.present(alert, animated: true, completion: nil)
+                return
             }
 
             let selectedItem = shoppingModel.shoppingList[indexPath.row]
             itemDetailViewController.item = selectedItem
 
         default:
-            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            os_log("Unexpected Segue Identifier.", log: OSLog.default, type: .error)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }

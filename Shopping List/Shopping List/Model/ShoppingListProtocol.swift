@@ -33,13 +33,4 @@ protocol ShoppingList {
      - Returns: `true` if the item at `index` was removed from a `shoppingList`, otherwise `false`.
      */
     func remove(at index: Int) -> Bool
-
-    /**
-     Edit the item at specified index from the list.
-     
-     - Parameter index: The position of the element in the `shoppingList` to edit.
-     - Parameter newItem: replace old item with `newItem`.
-     - Returns: `true `  if the item at `index` was successfully edited, otherwise `false`.
-     */
-    func edit(at index: Int, with newItem: String) -> Bool
 }

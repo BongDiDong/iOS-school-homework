@@ -24,9 +24,6 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Enable the Save button only if the text field has a valid Item name.
-        updateSaveButtonState()
-
         // Set up views if editing an existing Meal.
         if let item = item {
             navigationItem.title = item
@@ -35,6 +32,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
 
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
+
+        nameTextField.becomeFirstResponder()
     }
 
     // MARK: - UITextFieldDelegate
@@ -43,13 +42,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        saveButton.isEnabled = false
-    }
-
     func textFieldDidEndEditing(_ textField: UITextField) {
-        updateSaveButtonState()
         navigationItem.title = textField.text
     }
 
@@ -66,13 +59,29 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
             owningNavigationController.popViewController(animated: true)
             os_log("Cancel editing current item.", log: OSLog.default, type: .debug)
         } else {
-            fatalError("The ItemViewController is not inside a navigation controller.")
+            os_log("The ItemViewController is not inside a navigation controller.", log: OSLog.default, type: .error)
         }
+    }
+
+    // Prevent segue when trying to save an empty item.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let button = sender as? UIBarButtonItem,
+               button === saveButton,
+               nameTextField.text == "" {
+
+            let alert = UIAlertController(title: "Empty item name",
+                                          message: "Enter the item name before saving it.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
+            return false
+        }
+        return true
     }
 
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         super.prepare(for: segue, sender: sender)
 
         // Configure the destination view controller only when the save button is pressed.
@@ -82,12 +91,5 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
         }
 
         item = nameTextField.text ?? ""
-    }
-
-    // MARK: - Private Methods
-    private func updateSaveButtonState() {
-        // Disable the Save button if the text field is empty.
-        let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
     }
 }
