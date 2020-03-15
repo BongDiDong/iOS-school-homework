@@ -6,7 +6,7 @@ class Stack<Element> {
     ///
     ///     let stack = Stack<Int>
     ///     stack.push(element: 7)
-    ///     //head -> 7
+    ///     //top -> 7
     ///
     /// - Parameter element: The element to push on top of the stack
     /// - Complexity: O(1).
@@ -19,10 +19,10 @@ class Stack<Element> {
     ///     let stack = Stack<Int>()
     ///     stack.push(element: 7)
     ///     stack.push(element: 9)
-    ///     //head -> 9 -> 7
+    ///     //top -> 9 -> 7
     ///     print(stack.pop())
     ///     //prints "9"
-    ///     //head -> 7
+    ///     //top -> 7
     ///
     /// - Returns: The first element on top of the stack, or nil if stack is empty
     /// - Complexity: O(1)
@@ -36,6 +36,8 @@ class Stack<Element> {
     ///     stack.push(element: 7)
     ///     stack.push(element: 9)
     ///     print(stack.top())
+    ///     //prints "9"
+    ///     //top -> 9 -> 7
     ///
     /// - Returns: The first element on top of the stack, or nil if stack is empty
     /// - Complexity: O(1)
@@ -149,6 +151,7 @@ class StackStatistics<Element>: Stack<Element> where Element : Comparable {
     ///     stack.push(element: 2)
     ///     stack.push(element: 5)
     ///     print(stack.minimumElement())
+    ///     //prints "2"
     ///
     /// - Returns: The minimum element in the stack, or nil if stack is empty
     /// - Complexity: O(1)
