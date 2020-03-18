@@ -55,12 +55,17 @@ class LinkedList<Element> {
         return head?.data
     }
     
-    /// Adds a new element at the head of the list
+    /// Adds a new element at the top of the list.
     ///
     ///     let linkedList = LinkedList<Int>()
     ///     linkedList.append(7)
     ///     linkedList.append(5)
     ///     //head -> 5 -> 7
+    ///
+    /// Property `first` now returns a new element.
+    ///
+    ///     print(linkedList.first)
+    ///     //prints "5"
     ///
     /// - Parameter element: The element to append to the list
     /// - Complexity: O(1).
@@ -87,9 +92,9 @@ class LinkedList<Element> {
     }
 }
 
-///Container with particular type which can refer to another Frame.
+/// Container with particular type which can refer to another Frame.
 ///
-///There are two ways to initialize frame:
+/// There are two ways to initialize frame:
 ///
 ///     //without reference to another Frame
 ///     let frame = Frame<Int>(data: 4, previousFrame: nil)
@@ -123,7 +128,7 @@ stack.pop()
 stack.pop()
 stack.top()
 
-/// Container for elements organized with LIFO principle. Stores the current minimum element of the Stack.
+/// Container for elements organized with LIFO principle. Stores the current minimum element in the container.
 /// Elements in StackStatistics must conform to Comparable protocol
 class StackStatistics<Element>: Stack<Element> where Element : Comparable {
     private let stackOfMinElements = Stack<Element>()
@@ -144,7 +149,7 @@ class StackStatistics<Element>: Stack<Element> where Element : Comparable {
         return element
     }
     
-    /// Return minimum element in the stack
+    /// Returns minimum element in the stack
     ///
     ///     let stack = StackStatistics<Int>()
     ///     stack.push(element: 3)
