@@ -29,11 +29,4 @@ class ShoppingModel: ShoppingList {
         shoppingList.remove(at: index)
         return true
     }
-
-    func edit(at index: Int, with newValue: String) -> Bool {
-        guard (0..<shoppingList.count).contains(index) else { return false }
-
-        shoppingList[index] = newValue
-        return true
-    }
 }

@@ -15,10 +15,6 @@ extension ItemsTableViewController {
         return shoppingModel.shoppingList.count
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cellIdentifier = "ItemTableViewCell"

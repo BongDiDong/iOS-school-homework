@@ -14,21 +14,12 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Propeties
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    /*
-     This value is either passed by `ItemsTableViewController` in `prepare(for:sender:)`
-     or constructed as part of adding a new item.
-     */
+
     var item: String?
 
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set up views if editing an existing Meal.
-        if let item = item {
-            navigationItem.title = item
-            nameTextField.text   = item
-        }
 
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
@@ -48,19 +39,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        // Depending on style of presentation (modal or push presentation),
-        // this view controller needs to be dismissed in two different ways.
-        let isPresentingInAddItemMode = presentingViewController is UINavigationController
-
-        if isPresentingInAddItemMode {
-            dismiss(animated: true, completion: nil)
-            os_log("Cancel adding a new item.", log: OSLog.default, type: .debug)
-        } else if let owningNavigationController = navigationController {
-            owningNavigationController.popViewController(animated: true)
-            os_log("Cancel editing current item.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("The ItemViewController is not inside a navigation controller.", log: OSLog.default, type: .error)
-        }
+        dismiss(animated: true, completion: nil)
+        os_log("Cancel adding a new item.", log: OSLog.default, type: .debug)
     }
 
     // Prevent segue when trying to save an empty item.

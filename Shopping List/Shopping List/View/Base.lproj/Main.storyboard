@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemTableViewCell" id="qMk-j4-MJM" customClass="ItemTableViewCell" customModule="Shopping_List" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemTableViewCell" id="qMk-j4-MJM" customClass="ItemTableViewCell" customModule="Shopping_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qMk-j4-MJM" id="jfK-7f-sxt">
@@ -41,7 +41,6 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="nameLabel" destination="PnG-9t-vOV" id="hg6-NP-TeH"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="LZA-SE-5QI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -141,10 +140,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gnf-tW-4Rn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="488"/>
+            <point key="canvasLocation" x="574" y="129"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="LZA-SE-5QI"/>
-    </inferredMetricsTieBreakers>
 </document>
