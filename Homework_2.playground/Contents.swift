@@ -55,17 +55,12 @@ class LinkedList<Element> {
         return head?.data
     }
     
-    /// Adds a new element at the top of the list.
+    /// Adds a new first element to the list.
     ///
     ///     let linkedList = LinkedList<Int>()
     ///     linkedList.append(7)
     ///     linkedList.append(5)
     ///     //head -> 5 -> 7
-    ///
-    /// Property `first` now returns a new element.
-    ///
-    ///     print(linkedList.first)
-    ///     //prints "5"
     ///
     /// - Parameter element: The element to append to the list
     /// - Complexity: O(1).
@@ -128,7 +123,7 @@ stack.pop()
 stack.pop()
 stack.top()
 
-/// Container for elements organized with LIFO principle. Stores the current minimum element in the container.
+/// Container for elements organized with LIFO principle. Allows to get the current minimum element in O(1).
 /// Elements in StackStatistics must conform to Comparable protocol
 class StackStatistics<Element>: Stack<Element> where Element : Comparable {
     private let stackOfMinElements = Stack<Element>()
