@@ -35,4 +35,21 @@ class ItemsTableViewController: UITableViewController {
         }
     }
 
+    // According to limitation of the free version, prevent segue when trying to add extra item to the list.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard identifier == "AddItem", shoppingModel.shoppingList.count < shoppingModel.maximumNumberOfItems else {
+            let alert = UIAlertController(title: "Free version limitation",
+                                          message: """
+                                                Buy the full version of our application to unlock additional features.
+                                                Like adding more than 10 items to the list.
+                                                """,
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
+            return false
+        }
+        return true
+    }
+
 }

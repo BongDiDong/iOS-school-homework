@@ -9,17 +9,12 @@
 class ShoppingModel: ShoppingList {
     private(set) var shoppingList = [String]()
 
+    let maximumNumberOfItems = 10
+
     func add(_ item: String) -> Bool {
         guard shoppingList.count < 10 else { return false }
 
         shoppingList.append(item)
-        return true
-    }
-
-    func remove(_ item: String) -> Bool {
-        guard let index = shoppingList.firstIndex(of: item) else { return false }
-
-        shoppingList.remove(at: index)
         return true
     }
 
