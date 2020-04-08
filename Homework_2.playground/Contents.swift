@@ -1,47 +1,115 @@
-class Stack {
-    private let linkedList = LinkedList()
+/// Container for elements organized with LIFO principle.
+class Stack<Element> {
+    private let linkedList = LinkedList<Element>()
     
-    func push(element: Int) {
+    /// Adds a new element on top of the stack
+    ///
+    ///     let stack = Stack<Int>
+    ///     stack.push(element: 7)
+    ///     //top -> 7
+    ///
+    /// - Parameter element: The element to push on top of the stack
+    /// - Complexity: O(1).
+    func push(element: Element) {
         linkedList.append(element)
     }
     
-    func pop() -> Int? {
+    /// Removes and returns the first element on top of the stack
+    ///
+    ///     let stack = Stack<Int>()
+    ///     stack.push(element: 7)
+    ///     stack.push(element: 9)
+    ///     //top -> 9 -> 7
+    ///     print(stack.pop())
+    ///     //prints "9"
+    ///     //top -> 7
+    ///
+    /// - Returns: The first element on top of the stack, or nil if stack is empty
+    /// - Complexity: O(1)
+    func pop() -> Element? {
         return linkedList.removeFirst()
     }
     
-    func top() -> Int? {
+    /// Returns the first element on top of the stack
+    ///
+    ///     let stack = Stack<Int>()
+    ///     stack.push(element: 7)
+    ///     stack.push(element: 9)
+    ///     print(stack.top())
+    ///     //prints "9"
+    ///     //top -> 9 -> 7
+    ///
+    /// - Returns: The first element on top of the stack, or nil if stack is empty
+    /// - Complexity: O(1)
+    func top() -> Element? {
         return linkedList.first
     }
 }
 
-class LinkedList {
-    private var head: Frame?
-    var first: Int? {
+/// Linear collection of data elements, where each element points to the next element.
+class LinkedList<Element> {
+    private var head: Frame<Element>?
+    
+    /// Returns the first element in the list, or nil if list is empty
+    var first: Element? {
         return head?.data
     }
     
-    func append(_ element: Int) {
+    /// Adds a new first element to the list.
+    ///
+    ///     let linkedList = LinkedList<Int>()
+    ///     linkedList.append(7)
+    ///     linkedList.append(5)
+    ///     //head -> 5 -> 7
+    ///
+    /// - Parameter element: The element to append to the list
+    /// - Complexity: O(1).
+    func append(_ element: Element) {
         head = Frame(data: element, previousFrame: head)
     }
     
-    func removeFirst() -> Int? {
+    /// Removes and returns the first element in the list
+    ///
+    ///     let linkedList = LinkedList<Int>()
+    ///     linkedList.append(7)
+    ///     linkedList.append(5)
+    ///     //head -> 5 -> 7
+    ///     print(linkedList.removeFirst())
+    ///     //prints "5"
+    ///     //head -> 7
+    ///
+    /// - Returns: The first element in the list, or nil if list is empty
+    /// - Complexity: O(1)
+    func removeFirst() -> Element? {
         guard let head = head else { return nil }
         self.head = head.next
         return head.data
     }
 }
 
-class Frame {
-    let data: Int
-    let next: Frame?
-    
-    init(data: Int, previousFrame: Frame?) {
+/// Container with particular type which can refer to another Frame.
+///
+/// There are two ways to initialize frame:
+///
+///     //without reference to another Frame
+///     let frame = Frame<Int>(data: 4, previousFrame: nil)
+///
+///     //with reference to another Frame
+///     let frameWithRef = Frame<Int>(data: 4, previousFrame: frame)
+///
+class Frame<Element> {
+    /// Frame data of particular type
+    let data: Element
+    /// Reference to next Frame
+    let next: Frame<Element>?
+
+    init(data: Element, previousFrame: Frame<Element>?) {
         self.data = data
         self.next = previousFrame
     }
 }
 
-let stack = Stack()
+let stack = Stack<Int>()
 
 stack.pop()
 stack.top()
@@ -55,10 +123,12 @@ stack.pop()
 stack.pop()
 stack.top()
 
-class StackStatistics: Stack {
-    private let stackOfMinElements = Stack()
+/// Container for elements organized with LIFO principle. Allows to get the current minimum element in O(1).
+/// Elements in StackStatistics must conform to Comparable protocol
+class StackStatistics<Element>: Stack<Element> where Element : Comparable {
+    private let stackOfMinElements = Stack<Element>()
     
-    override func push(element: Int) {
+    override func push(element: Element) {
         super.push(element: element)
         
         guard let currentMinElement = stackOfMinElements.top(), currentMinElement < element else {
@@ -68,18 +138,29 @@ class StackStatistics: Stack {
         stackOfMinElements.push(element: currentMinElement)
     }
     
-    override func pop() -> Int? {
+    override func pop() -> Element? {
         guard let element = super.pop() else { return nil }
         stackOfMinElements.pop()
         return element
     }
     
-    func minimumElement() -> Int? {
+    /// Returns minimum element in the stack
+    ///
+    ///     let stack = StackStatistics<Int>()
+    ///     stack.push(element: 3)
+    ///     stack.push(element: 2)
+    ///     stack.push(element: 5)
+    ///     print(stack.minimumElement())
+    ///     //prints "2"
+    ///
+    /// - Returns: The minimum element in the stack, or nil if stack is empty
+    /// - Complexity: O(1)
+    func minimumElement() -> Element? {
         return stackOfMinElements.top()
     }
 }
 
-let stackStatistics = StackStatistics()
+let stackStatistics = StackStatistics<Int>()
 
 stackStatistics.push(element: 3)
 stackStatistics.push(element: 2)
