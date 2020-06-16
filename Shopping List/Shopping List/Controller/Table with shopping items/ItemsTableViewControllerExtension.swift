@@ -26,7 +26,7 @@ extension ItemsTableViewController {
         }
 
         let item = shoppingModel.shoppingList[indexPath.row]
-        cell.nameLabel.text = item
+        cell.nameLabel.text = item.name
 
         return cell
     }

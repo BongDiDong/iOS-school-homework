@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AA0C5C6F24154F2E0097DA8A /* ItemsTableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C5C6E24154F2E0097DA8A /* ItemsTableViewControllerExtension.swift */; };
+		AA31B1C02498FBBB00962807 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA31B1BE2498FBBB00962807 /* ShoppingList.xcdatamodeld */; };
+		AA31B1C22498FC1200962807 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA31B1C12498FC1200962807 /* CoreDataManager.swift */; };
 		AAB855B0240D582800A8F1FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB855AF240D582800A8F1FF /* AppDelegate.swift */; };
 		AAB855B4240D582800A8F1FF /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB855B3240D582800A8F1FF /* ItemViewController.swift */; };
 		AAB855B7240D582800A8F1FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB855B5240D582800A8F1FF /* Main.storyboard */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		AA0C5C6E24154F2E0097DA8A /* ItemsTableViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewControllerExtension.swift; sourceTree = "<group>"; };
+		AA31B1BF2498FBBB00962807 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
+		AA31B1C12498FC1200962807 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		AAB855AC240D582800A8F1FF /* Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB855AF240D582800A8F1FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAB855B3240D582800A8F1FF /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA31B1C32499047A00962807 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				AA31B1BE2498FBBB00962807 /* ShoppingList.xcdatamodeld */,
+				AA31B1C12498FC1200962807 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		AAB855A3240D582700A8F1FF = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +77,7 @@
 		AAB855AE240D582800A8F1FF /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				AA31B1C32499047A00962807 /* CoreData */,
 				AAB855C5240D58F500A8F1FF /* Model */,
 				AAB855CE240D665000A8F1FF /* View */,
 				AAB855C8240D659B00A8F1FF /* Controller */,
@@ -216,7 +230,9 @@
 				AA0C5C6F24154F2E0097DA8A /* ItemsTableViewControllerExtension.swift in Sources */,
 				AAB855CA240D65DA00A8F1FF /* ItemsTableViewController.swift in Sources */,
 				AAB855B0240D582800A8F1FF /* AppDelegate.swift in Sources */,
+				AA31B1C02498FBBB00962807 /* ShoppingList.xcdatamodeld in Sources */,
 				AAB855CD240D663700A8F1FF /* ItemTableViewCell.swift in Sources */,
+				AA31B1C22498FC1200962807 /* CoreDataManager.swift in Sources */,
 				AAB855C7240D591C00A8F1FF /* ShoppingListProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +433,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AA31B1BE2498FBBB00962807 /* ShoppingList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AA31B1BF2498FBBB00962807 /* ShoppingList.xcdatamodel */,
+			);
+			currentVersion = AA31B1BF2498FBBB00962807 /* ShoppingList.xcdatamodel */;
+			path = ShoppingList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AAB855A4240D582700A8F1FF /* Project object */;
 }
