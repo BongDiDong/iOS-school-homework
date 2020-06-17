@@ -8,7 +8,7 @@
 
 protocol ShoppingList {
     /// Stores items to shop
-    var shoppingList: [Item] { get }
+    var shoppingList: [String] { get }
 
     /// Maximum number of items that can be stored in the list.
     var maximumNumberOfItems: Int { get }

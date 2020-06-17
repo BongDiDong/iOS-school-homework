@@ -31,20 +31,16 @@ class CoreDataManager {
 
     private init() { }
 
-    func addItem(with name: String) -> Item? {
+    func addItem(with name: String) {
         let context = persistentContainer.viewContext
-
-        guard let item = NSEntityDescription.insertNewObject(forEntityName: Entities.item, into: context) as? Item
-        else { return nil }
+        let item = Item(context: context)
 
         item.name = name
 
         do {
             try context.save()
-            return item
         } catch {
             os_log("Failed to save item.", log: OSLog.default, type: .debug)
-            return nil
         }
     }
 
@@ -61,9 +57,11 @@ class CoreDataManager {
         }
     }
 
-    func removeItem(item: Item) {
+    func removeItem(at index: Int) {
         let context = persistentContainer.viewContext
-        context.delete(item)
+        let items = getItems()
+
+        context.delete(items[index])
 
         do {
             try context.save()

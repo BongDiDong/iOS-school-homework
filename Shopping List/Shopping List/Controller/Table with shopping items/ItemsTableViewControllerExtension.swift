@@ -26,7 +26,7 @@ extension ItemsTableViewController {
         }
 
         let item = shoppingModel.shoppingList[indexPath.row]
-        cell.nameLabel.text = item.name
+        cell.nameLabel.text = item
 
         return cell
     }
@@ -36,6 +36,7 @@ extension ItemsTableViewController {
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if shoppingModel.remove(at: indexPath.row) {
+                CoreDataManager.shared.removeItem(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 os_log("Item was successfully removed.", log: OSLog.default, type: .debug)
             } else {

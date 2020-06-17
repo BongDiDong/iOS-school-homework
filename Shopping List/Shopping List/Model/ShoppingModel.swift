@@ -7,24 +7,21 @@
 //
 
 class ShoppingModel: ShoppingList {
-    private(set) var shoppingList = CoreDataManager.shared.getItems()
+    private(set) var shoppingList = [String]()
 
     let maximumNumberOfItems = 10
 
     func add(_ item: String) -> Bool {
-        guard shoppingList.count < 10,
-              let newItem = CoreDataManager.shared.addItem(with: item)
-        else { return false }
+        guard shoppingList.count < 10 else { return false }
 
-        shoppingList.append(newItem)
+        shoppingList.append(item)
         return true
     }
 
     func remove(at index: Int) -> Bool {
         guard (0..<shoppingList.count).contains(index) else { return false }
 
-        let removedItem = shoppingList.remove(at: index)
-        CoreDataManager.shared.removeItem(item: removedItem)
+        shoppingList.remove(at: index)
         return true
     }
 }

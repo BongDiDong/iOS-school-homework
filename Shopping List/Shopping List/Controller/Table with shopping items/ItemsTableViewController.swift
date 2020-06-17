@@ -18,6 +18,10 @@ class ItemsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        CoreDataManager.shared.getItems().forEach {
+            _ = shoppingModel.add($0.name!)
+        }
+
         navigationItem.leftBarButtonItem = editButtonItem
     }
 
@@ -26,6 +30,7 @@ class ItemsTableViewController: UITableViewController {
         if let sourceViewController = sender.source as? ItemViewController, let item = sourceViewController.item {
 
             if shoppingModel.add(item) {
+                CoreDataManager.shared.addItem(with: item)
                 let newIndexPath = IndexPath(row: shoppingModel.shoppingList.count - 1, section: 0)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 os_log("Item was successfully added.", log: OSLog.default, type: .debug)
